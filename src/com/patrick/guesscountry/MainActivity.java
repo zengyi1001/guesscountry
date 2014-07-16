@@ -3,6 +3,7 @@ package com.patrick.guesscountry;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
@@ -19,4 +20,9 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	private void initUI(){
+		ImageView img = (ImageView) findViewById(R.id.img);
+		
+		
+	}
 }
