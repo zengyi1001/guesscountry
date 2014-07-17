@@ -13,6 +13,7 @@ public class AppContext extends Application{
 	Handler mHandler;
 	String mImei;
 	String mIccid;
+	private BaseActivity mCurActivity;
 	
 	 @Override
 	  public void onCreate() {
@@ -37,7 +38,13 @@ public class AppContext extends Application{
 		  mHandler.removeCallbacks(r);
 	  }
 	  
+	  public BaseActivity getCurActivity(){
+		  return mCurActivity;
+	  }
 	  
+	  public void setCurActivity(BaseActivity activity){
+		  mCurActivity = activity;
+	  }
 	  
 	  public String getImei(){
 		  if(mImei!=null){

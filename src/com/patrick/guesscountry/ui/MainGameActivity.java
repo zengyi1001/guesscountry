@@ -1,16 +1,16 @@
-package com.patrick.guesscountry;
+package com.patrick.guesscountry.ui;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
-import android.widget.ImageView;
 
-public class StartUpActivity extends Activity {
+import com.patrick.generaltool.BaseActivity;
+import com.patrick.guesscountry.R;
 
+public class MainGameActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_maingame);
 	}
 
 	@Override
@@ -18,11 +18,5 @@ public class StartUpActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
-	}
-
-	private void initUI(){
-		ImageView img = (ImageView) findViewById(R.id.img);
-		
-		
 	}
 }
