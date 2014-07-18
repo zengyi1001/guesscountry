@@ -1,10 +1,13 @@
 package com.patrick.generaltool;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 
-public class AssertFileTool {
+public class AssetFileTool {
 	public static String[] ListAssetsFile(String AssetsPath)
     {
 		AssetManager am = AppContext.getInstance().getAssets();
@@ -21,4 +24,18 @@ public class AssertFileTool {
 
 		return null;
     }
+	
+	public static BitmapDrawable getBitmapDrawable(String mAssertFilePath){
+		AssetManager am = AppContext.getInstance().getAssets();
+		InputStream is;
+		try {
+			is = am.open(mAssertFilePath);
+			return DrawableTool.getBitMapByInputStream(AppContext.getInstance(), is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

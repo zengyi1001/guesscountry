@@ -26,7 +26,8 @@ public class StartUpActivity extends Activity implements IDataInitListener{
 			@Override
 			public void run() {
 				startActivity(new Intent(StartUpActivity.this, MainGameActivity.class));
+				finish();
 			}
-		}, 3 * 1000);
+		}, 1 * 1000);
 	}
 }

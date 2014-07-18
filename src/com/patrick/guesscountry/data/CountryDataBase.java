@@ -3,7 +3,7 @@ package com.patrick.guesscountry.data;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.patrick.generaltool.AssertFileTool;
+import com.patrick.generaltool.AssetFileTool;
 
 public class CountryDataBase {
 	public interface IDataInitListener{
@@ -30,10 +30,11 @@ public class CountryDataBase {
 		}
 		
 		mAllDataPicPath = new HashMap<String, String>();
-		mAllDataStrings = AssertFileTool.ListAssetsFile("pics");
+		mAllDataStrings = AssetFileTool.ListAssetsFile("pics");
 		if (mAllDataStrings != null){
 			for (int i = 0; i < mAllDataStrings.length; i++){
-				mAllDataPicPath.put(mAllDataStrings[i], "pics/" + mAllDataStrings[i]);
+				mAllDataStrings[i] = mAllDataStrings[i].replaceAll(".jpg"	, "");
+				mAllDataPicPath.put(mAllDataStrings[i], "pics/" + mAllDataStrings[i] + ".jpg");
 			}
 		}
 		
