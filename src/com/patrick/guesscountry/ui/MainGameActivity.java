@@ -6,14 +6,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.gamelogic.Examination;
 import com.patrick.guesscountry.gamelogic.GameLogic;
+import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
 import com.patrick.guesscountry.ui.FlagSelectView.IPicClickedListener;
 
-public class MainGameActivity extends BaseActivity implements IPicClickedListener{
+public class MainGameActivity extends BaseActivity implements IPicClickedListener, IDialogDismissListener{
 	private Examination mCurExamination;
 	private FlagSelectView mImg1;
 	private FlagSelectView mImg2;
@@ -27,7 +29,13 @@ public class MainGameActivity extends BaseActivity implements IPicClickedListene
 		setContentView(R.layout.activity_maingame);
 		mMediaTonePlayer = new MediaTonePlayer(null);
 		initUI();
-		getExam();
+		AppContext.getInstance().runOnUIThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				getExam();
+			}
+		}, 100);
 	}
 
 	@Override
@@ -42,6 +50,7 @@ public class MainGameActivity extends BaseActivity implements IPicClickedListene
 		if (isRight){
 			mMediaTonePlayer.playBeepSound(R.raw.tieqin);
 			getExam();
+			AnswerPassDialog.getInstance().showAnswerName(mCurExamination.getAnswer());
 		}else {
 			mMediaTonePlayer.playBeepSound(R.raw.oo);
 		}
@@ -70,6 +79,7 @@ public class MainGameActivity extends BaseActivity implements IPicClickedListene
 			}
 		});
 	
+		AnswerPassDialog.getInstance().setListener(this);
 	}
 	
 	private void showExample(){
@@ -81,8 +91,10 @@ public class MainGameActivity extends BaseActivity implements IPicClickedListene
 	}
 	
 	private void getExam(){
+		WaitProgressDialog.getInstance().showProgressDialog("∂¡Ã‚÷–...");
 		mCurExamination = GameLogic.getInstance().generateExamination();
 		showExample();
+		WaitProgressDialog.getInstance().hideProgressDialog();
 	}
 
 	@Override
@@ -93,4 +105,11 @@ public class MainGameActivity extends BaseActivity implements IPicClickedListene
 		}
 		handleExame(right);
 	}
+
+	@Override
+	public void onDismiss() {
+		getExam();
+	}
+	
+	
 }

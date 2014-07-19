@@ -9,7 +9,7 @@ public class Examination{
 	public interface IExamAnsweredListener{
 		public void onAnswered(boolean isRight);
 	}
-	
+	private final static int Max_Options = 4;
 	private ArrayList<String> mOptions;
 	private String mAnswer;
 	private IExamAnsweredListener mListener;
@@ -20,7 +20,7 @@ public class Examination{
 	}
 	
 	private boolean isOptionsFull(){
-		if (mOptions.size() >= 4){
+		if (mOptions.size() >= Max_Options){
 			return true;
 		}
 		return false;
