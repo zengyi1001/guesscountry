@@ -111,7 +111,6 @@
 巴拿马:Panama
 塞内加尔:Senegal
 印度尼西亚:Indonesia
-尼日尔:Niger
 厄瓜多尔:Ecuador
 白俄罗斯:Belarus
 以色列:Israel

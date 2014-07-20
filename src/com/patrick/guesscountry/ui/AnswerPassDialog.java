@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,6 +58,14 @@ public class AnswerPassDialog {
 		mNameTextView = (TextView)mRootView.findViewById(R.id.name);
 		mFlagView = (ImageView)mRootView.findViewById(R.id.img);
 		mRecordTextView = (TextView)mRootView.findViewById(R.id.record);
+		
+		mRootView.findViewById(R.id.body).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				mDialog.dismiss();
+			}
+		});
 	}
 	
 	public void showAnswerName(AnswerInfomation ai){
