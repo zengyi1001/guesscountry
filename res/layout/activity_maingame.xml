@@ -15,7 +15,14 @@
             android:id="@+id/btn_back"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:background="@drawable/backbtn_default" />
+            android:background="@drawable/btn_back_selector" />
+        
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="50sp"
+            android:layout_alignParentRight="true"
+            android:layout_height="50sp"
+            android:background="@drawable/btn_menu_selector" />
 
         <TextView
             android:id="@+id/record"

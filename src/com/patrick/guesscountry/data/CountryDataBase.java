@@ -12,14 +12,7 @@ import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 
 public class CountryDataBase {
-	public interface IDataInitListener{
-		public void onInitFinished();
-	}
-	
-	
-	
 	static private CountryDataBase mInstance;
-	private boolean mIsInited = false;
 	
 	private ArrayList<CountryItem> mAllCountrys;
 	private ArrayList<String> mAllUsualCountryNames;
@@ -33,23 +26,10 @@ public class CountryDataBase {
 		return mInstance;
 	}
 		
-	public void init(IDataInitListener listener){
-		if (mIsInited){
-			if (listener != null){
-				listener.onInitFinished();
-			}
-		}
-		
+	public void init(){	
 		initEN2CNMap();
 		getAllUsualCountryNames();
 		getAllCountryDatas();
-		
-		
-		mIsInited = true;
-		
-		if (listener != null){
-			listener.onInitFinished();
-		}
 	}
 	
 	public int getDataSize(){

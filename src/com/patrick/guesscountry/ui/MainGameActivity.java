@@ -2,6 +2,7 @@ package com.patrick.guesscountry.ui;
 
 import java.util.HashMap;
 
+import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -12,13 +13,15 @@ import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
-import com.patrick.guesscountry.data.CountryItem;
 import com.patrick.guesscountry.gamelogic.ExaminationItem;
 import com.patrick.guesscountry.gamelogic.GameLogic;
+import com.patrick.guesscountry.gamelogic.GameLogic.AnswerInfomation;
+import com.patrick.guesscountry.gamelogic.GameRecord;
 import com.patrick.guesscountry.gamelogic.IGameControlListener;
 import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
 
-public class MainGameActivity extends BaseActivity implements IDialogDismissListener, IGameControlListener{
+public class MainGameActivity extends BaseActivity implements IDialogDismissListener
+		, IGameControlListener{
 	private ExaminationItem mCurExamination;
 	private FlagSelectView mImg1;
 	private FlagSelectView mImg2;
@@ -85,7 +88,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		mProgressDialog = new WaitProgressDialog(this);
 	}
 	
-	private void showExample(){
+	private void showExam(){
 		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer().getCnName());
 		mImg1.setCountry(mCurExamination.getOptions().get(0));
 		mCountry2ViewMap.put(mCurExamination.getOptions().get(0).getEnName(), mImg1);
@@ -95,6 +98,9 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		mCountry2ViewMap.put(mCurExamination.getOptions().get(2).getEnName(), mImg3);
 		mImg4.setCountry(mCurExamination.getOptions().get(3));
 		mCountry2ViewMap.put(mCurExamination.getOptions().get(3).getEnName(), mImg4);
+		String recordString = String.format("您已连续答对了 %d 个，最高纪录 %d 个", GameRecord.getInstance().getMaxShot(),
+				GameRecord.getInstance().getRecord());
+		((TextView)findViewById(R.id.record)).setText(recordString);
 	}
 
 	@Override
@@ -106,22 +112,29 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 	public void onExaminationStart(ExaminationItem exam) {
 		mProgressDialog.showProgressDialog("读题中...");
 		mCurExamination = exam;
-		showExample();
+		showExam();
 		mProgressDialog.hideProgressDialog();
 	}
 
 	@Override
-	public void onAnswerResult(CountryItem country, boolean isRight) {
-		FlagSelectView view = mCountry2ViewMap.get(country.getEnName());
-		if (!isRight){
+	public void onAnswerResult(AnswerInfomation ai) {
+		FlagSelectView view = mCountry2ViewMap.get(ai.countrySelected.getEnName());
+		if (!ai.isRight){
 			view.setCry();
 			mMediaTonePlayer.playBeepSound(R.raw.oo);
 		}else{
-			mMediaTonePlayer.playBeepSound(R.raw.tieqin);
-			mShowAnswerDialog.showAnswerName(country);
+			mShowAnswerDialog.showAnswerName(ai);
+			if (ai.shoudCheer){
+				mMediaTonePlayer.playBeepSound(R.raw.junyue);
+				Builder builder = new Builder(this);
+				builder.setMessage("您诞生了新的连胜纪录!!!");
+				builder.setTitle("恭喜！");
+				builder.setPositiveButton("确定", null);
+				builder.create().show();
+			}else{
+				mMediaTonePlayer.playBeepSound(R.raw.tieqin);
+			}
 		}
-	}
-
-		
+	}		
 	
 }

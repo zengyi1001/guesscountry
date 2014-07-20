@@ -7,7 +7,11 @@ import com.patrick.guesscountry.data.CountryItem;
 
 
 public class GameLogic {
-	
+	public class AnswerInfomation{
+		public CountryItem countrySelected;
+		public boolean isRight;
+		public boolean shoudCheer;
+	}
 	private static GameLogic mInstance;
 	private ArrayList<IGameControlListener> mGameListeners;
 	
@@ -20,16 +24,13 @@ public class GameLogic {
 	}
 	
 	private GameLogic(){
-		mGameListeners = new ArrayList<IGameControlListener>();
+		
 	}
 	
 	private ExaminationItem mCurExamination;
 	
 	private ExaminationItem generateExamination(){
-		if (mCurExamination == null){
-			mCurExamination = new ExaminationItem();
-		}
-		mCurExamination.generateOptions();
+		mCurExamination = new ExaminationItem();
 		return mCurExamination;
 	}
 	
@@ -47,10 +48,14 @@ public class GameLogic {
 	
 	public void answer(CountryItem country){
 		boolean isRight = mCurExamination.answerExam(country);
-		
+		boolean isCheer = GameRecord.getInstance().answer(mCurExamination.isOneTimeShot());
+		AnswerInfomation ai = new AnswerInfomation();
+		ai.isRight = isRight;
+		ai.countrySelected = country;
+		ai.shoudCheer = isCheer;
 		Iterator<IGameControlListener> iterator = mGameListeners.iterator();
 		while (iterator.hasNext()){
-			iterator.next().onAnswerResult(country, isRight);
+			iterator.next().onAnswerResult(ai);
 		}
 	}
 	
@@ -60,5 +65,9 @@ public class GameLogic {
 		while (iterator.hasNext()){
 			iterator.next().onExaminationStart(mCurExamination);
 		}
+	}
+	
+	public void init(){
+		mGameListeners = new ArrayList<IGameControlListener>();
 	}
 }

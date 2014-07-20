@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.guesscountry.R;
-import com.patrick.guesscountry.data.CountryItem;
+import com.patrick.guesscountry.gamelogic.GameLogic.AnswerInfomation;
 
 public class AnswerPassDialog {
 	public interface IDialogDismissListener{
@@ -59,11 +59,11 @@ public class AnswerPassDialog {
 		mRecordTextView = (TextView)mRootView.findViewById(R.id.record);
 	}
 	
-	public void showAnswerName(CountryItem country){
-		mNameTextView.setText(country.getCnName());
+	public void showAnswerName(AnswerInfomation ai){
+		mNameTextView.setText(ai.countrySelected.getCnName());
 		mFlagView.setBackgroundDrawable(
 				AssetFileTool.getBitmapDrawable(
-						country.getPicPath()));
+						ai.countrySelected.getPicPath()));
 		mDialog.show();
 	}
 	

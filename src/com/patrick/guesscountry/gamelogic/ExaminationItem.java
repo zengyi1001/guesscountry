@@ -12,9 +12,11 @@ public class ExaminationItem{
 	private final static int Max_Options = 4;
 	private ArrayList<CountryItem> mOptions;
 	private CountryItem mAnswer;
+	private boolean mIsOneTimeShot = true;
 
 	public ExaminationItem(){
 		mOptions = new ArrayList<CountryItem>();
+		generateOptions();
 	}
 	
 	private boolean isOptionsFull(){
@@ -44,7 +46,7 @@ public class ExaminationItem{
 		return mOptions;
 	}
 	
-	public void generateOptions(){
+	private void generateOptions(){
 		mOptions.clear();
 		while (!isOptionsFull()){
 			CountryItem country = CountryDataBase.getInstance().generateDataRandom();
@@ -61,6 +63,11 @@ public class ExaminationItem{
 		if (country != null && country.equals(mAnswer)){		
 			return true;
 		}
+		mIsOneTimeShot = false;
 		return false;
+	}
+	
+	public boolean isOneTimeShot(){
+		return mIsOneTimeShot;
 	}
 }
