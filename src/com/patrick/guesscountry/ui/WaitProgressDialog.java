@@ -1,26 +1,20 @@
 package com.patrick.guesscountry.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 
-import com.patrick.generaltool.AppContext;
-
 public class WaitProgressDialog {
 	ProgressDialog mProgressDialog;
-	
-	static private WaitProgressDialog mInstance;
-	
-	static public WaitProgressDialog getInstance(){
-		if (mInstance == null){
-			mInstance = new WaitProgressDialog();
-		}
-		return mInstance;
+	private Activity mActivity;
+	public WaitProgressDialog(Activity activity){
+		mActivity = activity;
 	}
-	
+		
 	public void showProgressDialog(String message){
 		if (mProgressDialog == null){
-			mProgressDialog = new ProgressDialog(AppContext.getInstance().getCurActivity());
+			mProgressDialog = new ProgressDialog(mActivity);
 			mProgressDialog.setOnDismissListener(new OnDismissListener() {
 
 				@Override

@@ -7,21 +7,18 @@ import android.widget.TextView;
 
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.guesscountry.R;
-import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.CountryItem;
+import com.patrick.guesscountry.gamelogic.GameLogic;
 
 public class FlagSelectView {
-	public interface IPicClickedListener{
-		public void onPicClick(FlagSelectView view, String name);
-	}
 	private View mRootView;
-	private String mName;
+	private CountryItem mCountryItem;
 	private ImageView mFlagImageView;
 	private ImageView mCryImageView;
 	private TextView mNameTextView;
-	private IPicClickedListener mPicClickedListener;
 	
-	public FlagSelectView(IPicClickedListener listener){
-		mPicClickedListener = listener;
+	public FlagSelectView(){
+		
 	}
 
 	public void setRootView(View rootView){
@@ -33,19 +30,16 @@ public class FlagSelectView {
 			
 			@Override
 			public void onClick(View arg0) {
-				if (mPicClickedListener != null){
-					mNameTextView.setText(mName);
-					mPicClickedListener.onPicClick(FlagSelectView.this, mName);
-				}
+				mNameTextView.setText(mCountryItem.getCnName());
+				GameLogic.getInstance().answer(mCountryItem);
 			}
 		});
 	}
 	
-	public void setName(String name){
-		mName = name;
+	public void setCountry(CountryItem country){
+		mCountryItem = country;
 		mFlagImageView.setBackgroundDrawable(
-				AssetFileTool.getBitmapDrawable(
-						CountryDataBase.getInstance().getDataPath(mName)));
+				AssetFileTool.getBitmapDrawable(mCountryItem.getPicPath()));
 		
 		mCryImageView.setVisibility(View.INVISIBLE);
 		mNameTextView.setText("?");

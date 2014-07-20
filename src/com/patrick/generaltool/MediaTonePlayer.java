@@ -2,6 +2,8 @@ package com.patrick.generaltool;
 
 import java.io.IOException;
 
+import com.patrick.guesscountry.data.PrefenceData;
+
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -33,6 +35,9 @@ public class MediaTonePlayer {
 	}
 			
 	public void playBeepSound(int beeId) {
+		if (PrefenceData.getInstance().isSilence()){
+			return;
+		}
 		AssetFileDescriptor file = AppContext.getInstance().getResources().openRawResourceFd(beeId);
 		
 		if (mMediaPlayer == null) {

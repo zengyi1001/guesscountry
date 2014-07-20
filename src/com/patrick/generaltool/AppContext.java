@@ -1,5 +1,7 @@
 package com.patrick.generaltool;
 
+import java.util.ArrayList;
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -15,11 +17,15 @@ public class AppContext extends Application{
 	String mIccid;
 	private BaseActivity mCurActivity;
 	
+	public static String ACTION_FINISH_ACTIVITY = "com.patrick.finish_action";
+	private ArrayList<BaseActivity> mAllActivities;
+	
 	 @Override
 	  public void onCreate() {
 	      super.onCreate();
 	      instance = this;
 	      mHandler = new Handler();
+	      mAllActivities = new ArrayList<BaseActivity>();
 	  }
 	 
 	 public static AppContext getInstance(){
@@ -99,4 +105,23 @@ public class AppContext extends Application{
 		  }  
 		  return null; 
 	 }
+	
+	public void addActivity(BaseActivity activity){
+		if (mAllActivities != null && activity != null && !mAllActivities.contains(activity)){
+			mAllActivities.add(activity);
+		}
+	}
+	
+	public void removeActivity(BaseActivity activity){
+		if (mAllActivities != null && activity != null && mAllActivities.contains(activity)){
+			mAllActivities.remove(activity);
+		}
+	}
+	
+	public void exitApp(){
+		for (int i = 0; i < mAllActivities.size();i++){
+			mAllActivities.get(i).finish();
+		}
+		System.exit(0);
+	}
 }

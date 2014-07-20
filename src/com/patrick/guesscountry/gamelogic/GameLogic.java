@@ -1,12 +1,15 @@
 package com.patrick.guesscountry.gamelogic;
 
-import com.patrick.guesscountry.gamelogic.Examination.IExamAnsweredListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.patrick.guesscountry.data.CountryItem;
 
 
-public class GameLogic implements IExamAnsweredListener{
-	
+public class GameLogic {
 	
 	private static GameLogic mInstance;
+	private ArrayList<IGameControlListener> mGameListeners;
 	
 	public static GameLogic getInstance(){
 		if (mInstance == null){
@@ -16,19 +19,46 @@ public class GameLogic implements IExamAnsweredListener{
 		return mInstance;
 	}
 	
-	private Examination mCurExamination;
+	private GameLogic(){
+		mGameListeners = new ArrayList<IGameControlListener>();
+	}
 	
-	public Examination generateExamination(){
+	private ExaminationItem mCurExamination;
+	
+	private ExaminationItem generateExamination(){
 		if (mCurExamination == null){
-			mCurExamination = new Examination(this);
+			mCurExamination = new ExaminationItem();
 		}
 		mCurExamination.generateOptions();
 		return mCurExamination;
 	}
-
-	@Override
-	public void onAnswered(boolean isRight) {
-		// TODO Auto-generated method stub
+	
+	public void addListener(IGameControlListener listener){
+		if (listener != null && mGameListeners != null && !mGameListeners.contains(listener)){
+			mGameListeners.add(listener);
+		}
+	}
+	
+	public void removeListener(IGameControlListener listener){
+		if (listener != null && mGameListeners != null && mGameListeners.contains(listener)){
+			mGameListeners.remove(listener);
+		}
+	}
+	
+	public void answer(CountryItem country){
+		boolean isRight = mCurExamination.answerExam(country);
 		
+		Iterator<IGameControlListener> iterator = mGameListeners.iterator();
+		while (iterator.hasNext()){
+			iterator.next().onAnswerResult(country, isRight);
+		}
+	}
+	
+	public void requestExam(){
+		generateExamination();
+		Iterator<IGameControlListener> iterator = mGameListeners.iterator();
+		while (iterator.hasNext()){
+			iterator.next().onExaminationStart(mCurExamination);
+		}
 	}
 }

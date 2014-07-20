@@ -5,11 +5,11 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.patrick.generaltool.AssetFileTool;
-import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.CountryItem;
 
 public class FlagPicImageView extends ImageView {
 	
-	private String mNameString;
+	private CountryItem mCountry;
 	
 	public FlagPicImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -25,20 +25,11 @@ public class FlagPicImageView extends ImageView {
 		super(context, attrs, defStyle);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void setFlagName(String name){
-		mNameString = name;
-		//setBackground();
-	}
-	
-	public String getName(){
-		return mNameString;
-	}
-	
+		
 	@SuppressWarnings("deprecation")
-	public void setName(String name){
-		mNameString = name;
-		setBackgroundDrawable(AssetFileTool.getBitmapDrawable(CountryDataBase.getInstance().getDataPath(mNameString)));
+	public void setCountry(CountryItem countryItem){
+		mCountry = countryItem;
+		setBackgroundDrawable(AssetFileTool.getBitmapDrawable(mCountry.getPicPath()));
 	}
 	
 	

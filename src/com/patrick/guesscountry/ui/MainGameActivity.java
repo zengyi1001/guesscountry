@@ -1,5 +1,7 @@
 package com.patrick.guesscountry.ui;
 
+import java.util.HashMap;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -10,32 +12,29 @@ import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
-import com.patrick.guesscountry.gamelogic.Examination;
+import com.patrick.guesscountry.data.CountryItem;
+import com.patrick.guesscountry.gamelogic.ExaminationItem;
 import com.patrick.guesscountry.gamelogic.GameLogic;
+import com.patrick.guesscountry.gamelogic.IGameControlListener;
 import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
-import com.patrick.guesscountry.ui.FlagSelectView.IPicClickedListener;
 
-public class MainGameActivity extends BaseActivity implements IPicClickedListener, IDialogDismissListener{
-	private Examination mCurExamination;
+public class MainGameActivity extends BaseActivity implements IDialogDismissListener, IGameControlListener{
+	private ExaminationItem mCurExamination;
 	private FlagSelectView mImg1;
 	private FlagSelectView mImg2;
 	private FlagSelectView mImg3;
 	private FlagSelectView mImg4;
-	
+	private HashMap<String, FlagSelectView> mCountry2ViewMap;
 	private MediaTonePlayer mMediaTonePlayer;
+	private WaitProgressDialog mProgressDialog;
+	
+	private AnswerPassDialog mShowAnswerDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_maingame);
 		mMediaTonePlayer = new MediaTonePlayer(null);
-		initUI();
-		AppContext.getInstance().runOnUIThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				getExam();
-			}
-		}, 100);
+		initUI();	
 	}
 
 	@Override
@@ -45,71 +44,84 @@ public class MainGameActivity extends BaseActivity implements IPicClickedListene
 		return true;
 	}
 	
-	
-	private void handleExame(boolean isRight){
-		if (isRight){
-			mMediaTonePlayer.playBeepSound(R.raw.tieqin);
-			getExam();
-			AnswerPassDialog.getInstance().showAnswerName(mCurExamination.getAnswer());
-		}else {
-			mMediaTonePlayer.playBeepSound(R.raw.oo);
+	@Override
+	protected void onResume(){
+		super.onResume();
+		GameLogic.getInstance().addListener(this);
+		if (mCurExamination == null){
+			GameLogic.getInstance().requestExam();
 		}
 	}
 	
+	@Override
+	protected void onPause(){
+		super.onPause();
+		GameLogic.getInstance().removeListener(this);
+	}
+	
 	private void initUI(){
-		mImg1 = new FlagSelectView(this);
+		mImg1 = new FlagSelectView();
 		mImg1.setRootView(findViewById(R.id.option1));
 		
-		mImg2 = new FlagSelectView(this);
+		mImg2 = new FlagSelectView();
 		mImg2.setRootView(findViewById(R.id.option2));
 		
-		mImg3 = new FlagSelectView(this);
+		mImg3 = new FlagSelectView();
 		mImg3.setRootView(findViewById(R.id.option3));
 		
-		mImg4 = new FlagSelectView(this);
+		mImg4 = new FlagSelectView();
 		mImg4.setRootView(findViewById(R.id.option4));
 		
-		
+		mCountry2ViewMap = new HashMap<String, FlagSelectView>();
 		findViewById(R.id.btn_back).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				finish();
+				AppContext.getInstance().exitApp();
 			}
 		});
-	
-		AnswerPassDialog.getInstance().setListener(this);
+		mShowAnswerDialog = new AnswerPassDialog(this, this);
+		mProgressDialog = new WaitProgressDialog(this);
 	}
 	
 	private void showExample(){
-		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer());
-		mImg1.setName(mCurExamination.getOptions().get(0));
-		mImg2.setName(mCurExamination.getOptions().get(1));
-		mImg3.setName(mCurExamination.getOptions().get(2));
-		mImg4.setName(mCurExamination.getOptions().get(3));
+		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer().getCnName());
+		mImg1.setCountry(mCurExamination.getOptions().get(0));
+		mCountry2ViewMap.put(mCurExamination.getOptions().get(0).getEnName(), mImg1);
+		mImg2.setCountry(mCurExamination.getOptions().get(1));
+		mCountry2ViewMap.put(mCurExamination.getOptions().get(1).getEnName(), mImg2);
+		mImg3.setCountry(mCurExamination.getOptions().get(2));
+		mCountry2ViewMap.put(mCurExamination.getOptions().get(2).getEnName(), mImg3);
+		mImg4.setCountry(mCurExamination.getOptions().get(3));
+		mCountry2ViewMap.put(mCurExamination.getOptions().get(3).getEnName(), mImg4);
 	}
-	
-	private void getExam(){
-		WaitProgressDialog.getInstance().showProgressDialog("读题中...");
-		mCurExamination = GameLogic.getInstance().generateExamination();
+
+	@Override
+	public void onAnswerPassDialogDismiss() {
+		GameLogic.getInstance().requestExam();
+	}
+
+	@Override
+	public void onExaminationStart(ExaminationItem exam) {
+		mProgressDialog.showProgressDialog("读题中...");
+		mCurExamination = exam;
 		showExample();
-		WaitProgressDialog.getInstance().hideProgressDialog();
+		mProgressDialog.hideProgressDialog();
 	}
 
 	@Override
-	public void onPicClick(FlagSelectView view, String name) {
-		boolean right = mCurExamination.answerExam(name);
-		if (!right){
+	public void onAnswerResult(CountryItem country, boolean isRight) {
+		FlagSelectView view = mCountry2ViewMap.get(country.getEnName());
+		if (!isRight){
 			view.setCry();
+			mMediaTonePlayer.playBeepSound(R.raw.oo);
+		}else{
+			mMediaTonePlayer.playBeepSound(R.raw.tieqin);
+			mShowAnswerDialog.showAnswerName(country);
 		}
-		handleExame(right);
 	}
 
-	@Override
-	public void onDismiss() {
-		getExam();
-	}
-	
+		
 	
 }
