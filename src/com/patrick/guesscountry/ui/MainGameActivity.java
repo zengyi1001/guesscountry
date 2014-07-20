@@ -3,6 +3,7 @@ package com.patrick.guesscountry.ui;
 import java.util.HashMap;
 
 import android.app.AlertDialog.Builder;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -82,6 +83,14 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				AppContext.getInstance().exitApp();
+			}
+		});
+		findViewById(R.id.btn_menu).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(MainGameActivity.this, SettingActivity.class));
 			}
 		});
 		mShowAnswerDialog = new AnswerPassDialog(this, this);

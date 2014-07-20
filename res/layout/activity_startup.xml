@@ -3,15 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainbg"
+    xmlns:adsmogo="http://www.adsmogo.com"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="程序数据加载中..."
+        android:textColor="@color/green"
+        android:textSize="20sp" />
+
     
-	<TextView android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/green"
-            android:id="@+id/word"
-            android:textSize="20sp"
-            android:text="程序数据加载中..."/>
+
 </RelativeLayout>

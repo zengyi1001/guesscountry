@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="40sp"
         android:background="@drawable/navibg" >
 
         <Button
@@ -35,7 +35,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="400sp"
+        android:layout_width="300sp"
         android:layout_height="match_parent"
         android:layout_above="@+id/buttom"
         android:layout_below="@+id/title"
@@ -228,7 +228,7 @@
     <RelativeLayout
         android:id="@+id/buttom"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="40sp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/footer" >
 
@@ -237,9 +237,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Banana"
+            android:text="印度尼西亚"
             android:textColor="@color/white"
-            android:textSize="35sp" />
+            android:textSize="30sp" />
     </RelativeLayout>
 
 </RelativeLayout>

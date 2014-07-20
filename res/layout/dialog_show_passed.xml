@@ -1,17 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:adsmogo="http://www.adsmogo.com"
     android:layout_height="match_parent" >
 
     <RelativeLayout
-        android:layout_width="440sp"
-        android:background="@null"
         android:id="@+id/body"
-        android:layout_height="290sp" >
+        android:layout_width="380sp"
+        android:layout_height="280sp"
+        android:background="@null" >
 
         <RelativeLayout
             android:id="@+id/content"
-            android:layout_width="400sp"
+            android:layout_width="350sp"
             android:layout_height="250sp"
             android:layout_alignParentBottom="true"
             android:background="@color/whitesmoke" >
@@ -19,7 +20,7 @@
             <RelativeLayout
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="40sp"
                 android:background="@drawable/navibg" >
 
                 <TextView
@@ -29,12 +30,13 @@
                     android:layout_centerInParent="true"
                     android:text="中国"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@+id/adsMogoView"
                 android:layout_below="@+id/title"
                 android:orientation="vertical" >
 
@@ -55,14 +57,22 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
+
+           <com.adsmogo.adview.AdsMogoLayout
+            android:id="@+id/adsMogoView"
+            android:layout_width="fill_parent"
+            android:layout_height="60sp"
+            android:layout_alignParentBottom="true"
+            adsmogo:appid="93535c6092f543e8a257ee435a69da06" >
+        </com.adsmogo.adview.AdsMogoLayout>
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/smile"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="360sp"
+            android:layout_marginLeft="320sp"
             android:background="@drawable/smile" />
     </RelativeLayout>
 
