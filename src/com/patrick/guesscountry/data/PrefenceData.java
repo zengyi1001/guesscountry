@@ -63,7 +63,7 @@ public class PrefenceData {
 		Editor editor = mSp.edit();
 		editor.putBoolean(PARAM_SILENCE, value);
 		editor.commit();
-		mIsOnlyCommon = value;
+		mIsSilence = value;
 	}
 	
 	/**
