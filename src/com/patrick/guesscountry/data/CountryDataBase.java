@@ -19,6 +19,8 @@ public class CountryDataBase {
 
 	private HashMap<String, String> mCountryEN2CNMap;
 	
+	public static int BE_STAR_COUNT = 3;	// 收集国家需要的次数
+	
 	public static CountryDataBase getInstance(){
 		if (mInstance == null){
 			mInstance = new CountryDataBase();
@@ -89,6 +91,9 @@ public class CountryDataBase {
 		}
 	}
 	
+	public String getCnName(String enName){
+		return mCountryEN2CNMap.get(enName);
+	}
 	
 	
 	private void initEN2CNMap(){

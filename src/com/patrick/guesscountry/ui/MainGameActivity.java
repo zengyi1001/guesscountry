@@ -14,6 +14,9 @@ import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
+import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.SqliteDataBaseHelper;
+import com.patrick.guesscountry.data.SqliteDataBaseHelper.IGetNewStarListener;
 import com.patrick.guesscountry.gamelogic.ExaminationItem;
 import com.patrick.guesscountry.gamelogic.GameLogic;
 import com.patrick.guesscountry.gamelogic.GameLogic.AnswerInfomation;
@@ -22,7 +25,7 @@ import com.patrick.guesscountry.gamelogic.IGameControlListener;
 import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
 
 public class MainGameActivity extends BaseActivity implements IDialogDismissListener
-		, IGameControlListener{
+		, IGameControlListener, IGetNewStarListener{
 	private ExaminationItem mCurExamination;
 	private FlagSelectView mImg1;
 	private FlagSelectView mImg2;
@@ -55,12 +58,14 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		if (mCurExamination == null){
 			GameLogic.getInstance().requestExam();
 		}
+		SqliteDataBaseHelper.getInstance().setListener(this);
 	}
 	
 	@Override
 	protected void onPause(){
 		super.onPause();
 		GameLogic.getInstance().removeListener(this);
+		SqliteDataBaseHelper.getInstance().removeListener(this);
 	}
 	
 	private void initUI(){
@@ -144,6 +149,16 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 				mMediaTonePlayer.playBeepSound(R.raw.tieqin);
 			}
 		}
+	}
+
+	@Override
+	public void onGetNewStar(String starName) {
+		String cnName = CountryDataBase.getInstance().getCnName(starName);
+		Builder builder = new Builder(this);
+		builder.setMessage("您收藏了国家“"+cnName+"”");
+		builder.setTitle("恭喜！");
+		builder.setPositiveButton("确定", null);
+		builder.create().show();
 	}		
 	
 }

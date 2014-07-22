@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.patrick.guesscountry.data.CountryItem;
+import com.patrick.guesscountry.data.SqliteDataBaseHelper;
 
 
 public class GameLogic {
@@ -48,7 +49,15 @@ public class GameLogic {
 	
 	public void answer(CountryItem country){
 		boolean isRight = mCurExamination.answerExam(country);
-		boolean isCheer = GameRecord.getInstance().answer(mCurExamination.isOneTimeShot());
+		boolean isOneTimeShot = mCurExamination.isOneTimeShot();
+		
+		if (isOneTimeShot){
+			SqliteDataBaseHelper.getInstance().addStarCount(country.mEnName);
+		}else{
+			SqliteDataBaseHelper.getInstance().resetStarCount(country.mEnName);
+		}
+		
+		boolean isCheer = GameRecord.getInstance().answer(isOneTimeShot);
 		AnswerInfomation ai = new AnswerInfomation();
 		ai.isRight = isRight;
 		ai.countrySelected = country;

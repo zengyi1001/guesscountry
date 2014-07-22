@@ -1,6 +1,7 @@
 package com.patrick.guesscountry.gamelogic;
 
 import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.SqliteDataBaseHelper;
 
 public class GameIniter {
 	private static GameIniter mInstance;
@@ -22,6 +23,7 @@ public class GameIniter {
 				listener.onInitFinished();
 			}
 		}
+		SqliteDataBaseHelper.getInstance().init();
 		CountryDataBase.getInstance().init();
 		GameLogic.getInstance().init();
 		GameRecord.getInstance().init();
