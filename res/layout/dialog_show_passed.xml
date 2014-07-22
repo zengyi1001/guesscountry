@@ -6,14 +6,14 @@
 
     <RelativeLayout
         android:id="@+id/body"
-        android:layout_width="380sp"
-        android:layout_height="280sp"
+        android:layout_width="250sp"
+        android:layout_height="180sp"
         android:background="@null" >
 
         <RelativeLayout
             android:id="@+id/content"
-            android:layout_width="350sp"
-            android:layout_height="250sp"
+            android:layout_width="220dp"
+            android:layout_height="150dp"
             android:layout_alignParentBottom="true"
             android:background="@color/whitesmoke" >
 
@@ -36,7 +36,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/adsMogoView"
                 android:layout_below="@+id/title"
                 android:orientation="vertical" >
 
@@ -57,14 +56,6 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
-
-           <com.adsmogo.adview.AdsMogoLayout
-            android:id="@+id/adsMogoView"
-            android:layout_width="fill_parent"
-            android:layout_height="60sp"
-            android:layout_alignParentBottom="true"
-            adsmogo:appid="93535c6092f543e8a257ee435a69da06" >
-        </com.adsmogo.adview.AdsMogoLayout>
         </RelativeLayout>
 
         <ImageView
@@ -72,7 +63,7 @@
             android:layout_width="60sp"
             android:layout_height="60sp"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="320sp"
+            android:layout_marginLeft="190sp"
             android:background="@drawable/smile" />
     </RelativeLayout>
 

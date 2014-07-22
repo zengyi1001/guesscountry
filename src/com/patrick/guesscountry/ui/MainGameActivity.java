@@ -36,7 +36,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_maingame);
+		setContentView(R.layout.activity_main2);
 		mMediaTonePlayer = new MediaTonePlayer(null);
 		initUI();	
 	}
@@ -107,7 +107,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		mCountry2ViewMap.put(mCurExamination.getOptions().get(2).getEnName(), mImg3);
 		mImg4.setCountry(mCurExamination.getOptions().get(3));
 		mCountry2ViewMap.put(mCurExamination.getOptions().get(3).getEnName(), mImg4);
-		String recordString = String.format("您已连续答对了 %d 个，最高纪录 %d 个", GameRecord.getInstance().getMaxShot(),
+		String recordString = String.format("当前连对 %d 个\n最高连对 %d 个", GameRecord.getInstance().getMaxShot(),
 				GameRecord.getInstance().getRecord());
 		((TextView)findViewById(R.id.record)).setText(recordString);
 	}
