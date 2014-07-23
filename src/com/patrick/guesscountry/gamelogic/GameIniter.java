@@ -1,5 +1,7 @@
 package com.patrick.guesscountry.gamelogic;
 
+import com.baidu.frontia.Frontia;
+import com.patrick.generaltool.AppContext;
 import com.patrick.guesscountry.data.CountryDataBase;
 import com.patrick.guesscountry.data.SqliteDataBaseHelper;
 
@@ -27,7 +29,7 @@ public class GameIniter {
 		CountryDataBase.getInstance().init();
 		GameLogic.getInstance().init();
 		GameRecord.getInstance().init();
-		
+		Frontia.init(AppContext.getInstance(), "app_key");
 		if (listener != null){
 			listener.onInitFinished();
 		}
