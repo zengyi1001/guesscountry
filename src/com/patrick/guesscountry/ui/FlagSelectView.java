@@ -16,6 +16,7 @@ public class FlagSelectView {
 	private ImageView mFlagImageView;
 	private ImageView mCryImageView;
 	private TextView mNameTextView;
+	private ImageView mQuestionView;
 	
 	public FlagSelectView(){
 		
@@ -30,10 +31,14 @@ public class FlagSelectView {
 			
 			@Override
 			public void onClick(View arg0) {
-				mNameTextView.setText(mCountryItem.getCnName());
 				GameLogic.getInstance().answer(mCountryItem);
+				mNameTextView.setText(mCountryItem.getCnName());
+				mNameTextView.setVisibility(View.VISIBLE);
+				mQuestionView.setVisibility(View.INVISIBLE);
 			}
 		});
+		
+		mQuestionView = (ImageView)mRootView.findViewById(R.id.questionshow);
 	}
 	
 	public void setCountry(CountryItem country){
@@ -42,10 +47,12 @@ public class FlagSelectView {
 				AssetFileTool.getBitmapDrawable(mCountryItem.getPicPath()));
 		
 		mCryImageView.setVisibility(View.INVISIBLE);
-		mNameTextView.setText("?");
+		mNameTextView.setVisibility(View.INVISIBLE);
+		mQuestionView.setVisibility(View.VISIBLE);
 	}
 	
 	public void setCry(){
 		mCryImageView.setVisibility(View.VISIBLE);
 	}
+
 }

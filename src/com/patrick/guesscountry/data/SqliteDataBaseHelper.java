@@ -84,7 +84,7 @@ public class SqliteDataBaseHelper {
 		for (cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
 			String starName = cursor.getString(cursor.getColumnIndex("name"));
 			int count = cursor.getInt(cursor.getColumnIndex("count"));
-			
+			Log.v("dog", "init name : " + starName + ", count :" + count);
 			if (count >= CountryDataBase.BE_STAR_COUNT){
 				mStarNames.add(starName);
 			}

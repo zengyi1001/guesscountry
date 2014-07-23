@@ -2,8 +2,6 @@ package com.patrick.generaltool;
 
 import java.util.ArrayList;
 
-import com.baidu.frontia.FrontiaApplication;
-
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -12,7 +10,7 @@ import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-public class AppContext extends FrontiaApplication{
+public class AppContext extends Application{
 	private static AppContext instance;
 	Handler mHandler;
 	String mImei;

@@ -95,6 +95,16 @@ public class CountryDataBase {
 		return mCountryEN2CNMap.get(enName);
 	}
 	
+	public CountryItem getCountryItem(String enName){
+		for (int i = 0; i < mAllCountrys.size(); i++){
+			if (mAllCountrys.get(i).getEnName().equals(enName)){
+				return mAllCountrys.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
 	
 	private void initEN2CNMap(){
 		try {

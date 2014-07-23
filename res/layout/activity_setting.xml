@@ -104,6 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/flagnumtip"
                 android:text="您捕获的国旗(0个):"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -111,6 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/flagstarinfo"
                 android:text="（连续答对三次即可捕获该国旗）"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -118,6 +120,9 @@
             <ListView
                 android:id="@+id/starlist"
                 android:layout_width="fill_parent"
+                android:divider="@null"
+                android:scrollbars="none"
+                android:dividerHeight="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" >
             </ListView>
