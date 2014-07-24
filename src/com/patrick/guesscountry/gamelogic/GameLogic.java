@@ -52,9 +52,9 @@ public class GameLogic {
 		boolean isOneTimeShot = mCurExamination.isOneTimeShot();
 		
 		if (isOneTimeShot){
-			SqliteDataBaseHelper.getInstance().addStarCount(country.mEnName);
+			SqliteDataBaseHelper.getInstance().addStarCount(country.getEnName());
 		}else{
-			SqliteDataBaseHelper.getInstance().resetStarCount(country.mEnName);
+			SqliteDataBaseHelper.getInstance().resetStarCount(country.getEnName());
 		}
 		
 		boolean isCheer = GameRecord.getInstance().answer(isOneTimeShot);

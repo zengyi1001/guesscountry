@@ -1,25 +1,22 @@
 package com.patrick.guesscountry.ui;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ToggleButton;
 
-import com.google.android.gms.internal.it;
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.generaltool.BaseActivity;
@@ -73,7 +70,7 @@ public class SettingActivity extends BaseActivity{
 			CountryItem item = CountryDataBase.getInstance().getCountryItem(name);
 			Log.v("dog", "get cnName:" + item.getCnName());
 			((ImageView) arg1.findViewById(R.id.flag)).setBackground(
-					AssetFileTool.getBitmapDrawable(item.getPicPath()));
+					AssetFileTool.getBitmapDrawable(item.getSmallPath()));
 			
 			((TextView)arg1.findViewById(R.id.name)).setText(item.getCnName());
 			return arg1;

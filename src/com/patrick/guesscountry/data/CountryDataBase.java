@@ -63,6 +63,8 @@ public class CountryDataBase {
 			item.setCnName(cnName);
 			item.setEnName(nameString);
 			item.setPicPath("countrys/" + allPicFiles[i]);
+			String bianpingPathString= "countrys_small/" + "small_" + allPicFiles[i];
+			item.setSmallPicPath(bianpingPathString);
 			if (mAllUsualCountryNames.contains(item.getEnName())){
 				item.setCommon(true);
 			}

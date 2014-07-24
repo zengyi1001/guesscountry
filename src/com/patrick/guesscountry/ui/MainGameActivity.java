@@ -3,12 +3,15 @@ package com.patrick.guesscountry.ui;
 import java.util.HashMap;
 
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
@@ -86,8 +89,19 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				AppContext.getInstance().exitApp();
+				Builder builder = new Builder(MainGameActivity.this);
+				builder.setTitle("提示");
+				builder.setMessage("您确定要退出吗?");
+				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						AppContext.getInstance().exitApp();
+					}
+				});
+				builder.setNegativeButton("取消", null);
+				builder.create().show();
 			}
 		});
 		findViewById(R.id.btn_menu).setOnClickListener(new OnClickListener() {
@@ -160,5 +174,21 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		builder.setPositiveButton("确定", null);
 		builder.create().show();
 	}		
+	
+	private long exitTime = 0;
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            Toast.makeText(getApplicationContext(), "再按一次退出应用", Toast.LENGTH_SHORT).show();                                
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            AppContext.getInstance().exitApp();
+	        }
+	        return true;   
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 	
 }

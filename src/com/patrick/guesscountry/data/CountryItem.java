@@ -1,10 +1,11 @@
 package com.patrick.guesscountry.data;
 
 public class CountryItem{
-	public String mEnName;
-	public String mCnName;
-	public String mPicPathString;
-	public boolean mIsUsual = false;
+	private String mEnName;
+	private String mCnName;
+	private String mPicPathString;
+	private String mSmallPicPathString;
+	private boolean mIsUsual = false;
 	
 	public String getEnName(){
 		return mEnName;
@@ -38,4 +39,11 @@ public class CountryItem{
 		mIsUsual = isCommon;
 	}
 	
+	public void setSmallPicPath(String path){
+		mSmallPicPathString = path;
+	}
+	
+	public String getSmallPath(){
+		return mSmallPicPathString;
+	}
 }

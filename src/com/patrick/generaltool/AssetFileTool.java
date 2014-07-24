@@ -38,4 +38,16 @@ public class AssetFileTool {
 		
 		return null;
 	}
+	
+	public static boolean isFileExist(String filePath){
+		AssetManager am = AppContext.getInstance().getAssets();
+		try{
+			InputStream is = am.open(filePath);
+			is.close();
+			return true;
+		}catch(Exception exception){
+			return false;
+			
+		}
+	}
 }

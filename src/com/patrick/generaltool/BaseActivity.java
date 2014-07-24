@@ -1,5 +1,8 @@
 package com.patrick.generaltool;
 
+import com.baidu.mobstat.StatActivity;
+import com.baidu.mobstat.StatService;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,10 +35,16 @@ public class BaseActivity extends Activity{
 	protected void onResume(){
 		super.onResume();
 		AppContext.getInstance().setCurActivity(this);
-		
+		StatService.onResume(this);
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置成全屏模式  
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏  
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏  
+	}
+	
+	@Override
+	protected void onPause(){
+		super.onPause();
+		StatService.onPause(this);
 	}
 	
 	@Override
