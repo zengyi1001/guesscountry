@@ -38,7 +38,7 @@
         android:theme="@android:style/Theme.NoTitleBar" >
         
         <meta-data android:name="BaiduMobAd_CHANNEL" android:value="Baidu Market"/>
- 		<meta-data android:name="BaiduMobAd_STAT_ID" android:value="abcd1234"/>       
+ 		<meta-data android:name="BaiduMobAd_STAT_ID" android:value="e50d7f4242"/>       
  		<!-- 是否开启错误日志统计，默认为false -->
 		<meta-data android:name="BaiduMobAd_EXCEPTION_LOG" android:value="true" />
 		<!-- 日志发送策略，可选值：APP_START、ONCE_A_DAY、SET_TIME_INTERVAL，默认为APP_START -->
