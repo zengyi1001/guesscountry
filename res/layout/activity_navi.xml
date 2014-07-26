@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lemonchiffon"
+    tools:context=".StartUpActivity" >
+
+    <Button android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_selector"
+        android:text="随机模式"
+        android:id="@+id/random"
+        android:textSize="20sp"
+        android:textColor="@color/whitesmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+    
+    <Button android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/random"
+        android:background="@drawable/btn_selector"
+        android:text="专家模式"
+        android:id="@+id/expert"
+        android:textSize="20sp"
+        android:textColor="@color/whitesmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+    
+    <Button android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_selector"
+        android:text="国旗浏览"
+        android:layout_below="@+id/expert"
+        android:id="@+id/showall"
+        android:textSize="20sp"
+        android:textColor="@color/whitesmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+    
+    
+    <Button android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_selector"
+        android:text="我的记录"
+        android:id="@+id/myrecord"
+        android:textSize="20sp"
+        android:layout_below="@+id/showall"
+        android:textColor="@color/whitesmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+    
+    <Button android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_selector"
+        android:text="退出"
+        android:id="@+id/exit"
+        android:textSize="20sp"
+        android:layout_below="@+id/myrecord"
+        android:textColor="@color/whitesmoke"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>

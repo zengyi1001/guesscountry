@@ -60,6 +60,7 @@ public class SqliteDataBaseHelper {
 		mDB.beginTransaction();
 		try{
 			mDB.execSQL("create table if not exists star(name VARCHAR(128) PRIMARY KEY, count INTEGER32);");
+			mDB.execSQL("create table if not exists record(name VARCHAR(128) PRIMARY KEY , num INTEGER32);");
 			mDB.setTransactionSuccessful();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -126,7 +127,7 @@ public class SqliteDataBaseHelper {
 			return;
 		}else{
 			count++;
-			updateDBRecord(starName, count);
+			updateStarRecord(starName, count);
 			if (count == CountryDataBase.BE_STAR_COUNT){
 				if (mListener != null){
 					mListener.onGetNewStar(starName);
@@ -181,7 +182,27 @@ public class SqliteDataBaseHelper {
 		}
 	}
 	
-	public void updateDBRecord(String starName,int count){
+	public void insertRecord(String type, int num){
+		if (mDB == null){
+			return;
+		}
+		
+		mDB.beginTransaction();
+		try{
+			
+			String sqlString = String.format("INSERT INTO record VALUES (\'%s\', \'%d\')", type, num);
+			Log.v("dog", "Sql : " + sqlString);
+			mDB.execSQL(sqlString);
+			mDB.setTransactionSuccessful();
+		}catch(Exception e){
+			Log.v("dog", e.getMessage());
+		}
+		finally{
+			mDB.endTransaction();
+		}
+	}
+	
+	public void updateStarRecord(String starName,int count){
 		
 		mDB.beginTransaction();
 		try{
@@ -192,5 +213,46 @@ public class SqliteDataBaseHelper {
 		}finally{
 			mDB.endTransaction();
 		}
+	}
+	
+	public void updateRecord(String type,int count){
+		
+		mDB.beginTransaction();
+		try{
+			String sqlString = String.format("UPDATE record SET num=\'%d\' WHERE name=\'%s\'", count, type);
+			Log.v("dog", "Sql : " + sqlString);
+			mDB.execSQL(sqlString);
+			mDB.setTransactionSuccessful();
+		}finally{
+			mDB.endTransaction();
+		}
+	}
+	
+	public void setRecord(String type, int num){
+		int record = getRecordCount(type);
+		if (record == 0){
+			insertRecord(type, num);
+		}else{
+			updateRecord(type, num);
+		}
+	}
+	
+	public int getRecordCount(String type){
+		mDB.beginTransaction();
+		int count = 0;
+		try{
+			String selection = "name=?";
+			String selectionArgs[] = {type};
+			Cursor cursor = mDB.query("record", new String[]{"name","num"}, selection, selectionArgs, null, null, null);
+			if (!cursor.moveToFirst()){
+				return 0;
+			}
+			count = cursor.getInt(cursor.getColumnIndex("num"));
+			mDB.setTransactionSuccessful();
+		}finally{
+			mDB.endTransaction();
+		}
+		return count;
+		
 	}
 }

@@ -93,11 +93,41 @@
                 android:textOff=""
                 android:textOn="" />
         </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/setting_en"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/setting_common"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="英文显示国家"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ToggleButton
+                android:id="@+id/useen"
+                android:layout_width="120sp"
+                android:layout_height="60sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/togglebtn_switch"
+                android:textOff=""
+                android:textOn="" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/setting_common"
+            android:layout_below="@+id/setting_en"
             android:layout_marginTop="30dp"
             android:orientation="vertical" >
 

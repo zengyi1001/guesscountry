@@ -13,10 +13,12 @@ public class PrefenceData {
 	private final String PARAM_ONLY_USUAL = "onlyUsual";
 	private final String PARAM_SILENCE = "silence";
 	private final String PARAM_MAX_RIGHT_RECORD = "record";	// 连续答对的最大记录
+	private final String PARAM_USE_EN = "use_en";	// 使用英文显示国家
 	
 	private boolean mIsOnlyCommon = false;
 	private boolean mIsSilence = false;
 	private int mRecord = 0;
+	private boolean mIsUseEn = false;
 	
 	private static SharedPreferences mSp;
 	public static PrefenceData getInstance(){
@@ -31,6 +33,7 @@ public class PrefenceData {
 		mIsOnlyCommon = mSp.getBoolean(PARAM_ONLY_USUAL, true);
 		mIsSilence = mSp.getBoolean(PARAM_SILENCE, false);
 		mRecord = mSp.getInt(PARAM_MAX_RIGHT_RECORD, 0);
+		mIsUseEn =  mSp.getBoolean(PARAM_USE_EN, false);
 	}
 	
 	/**
@@ -82,5 +85,16 @@ public class PrefenceData {
 		editor.putInt(PARAM_MAX_RIGHT_RECORD, value);
 		editor.commit();
 		mRecord = value;
+	}
+	
+	public boolean isUseEN(){
+		return mIsUseEn;
+	}
+	
+	public void setIsUseEn(Boolean value){
+		Editor editor = mSp.edit();
+		editor.putBoolean(PARAM_USE_EN, value);
+		editor.commit();
+		mIsUseEn = value;
 	}
 }

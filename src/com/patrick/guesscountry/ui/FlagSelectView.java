@@ -32,7 +32,7 @@ public class FlagSelectView {
 			@Override
 			public void onClick(View arg0) {
 				GameLogic.getInstance().answer(mCountryItem);
-				mNameTextView.setText(mCountryItem.getCnName());
+				mNameTextView.setText(mCountryItem.getShowName());
 				mNameTextView.setVisibility(View.VISIBLE);
 				mQuestionView.setVisibility(View.INVISIBLE);
 			}

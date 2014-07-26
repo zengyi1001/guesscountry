@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,13 +65,12 @@ public class SettingActivity extends BaseActivity{
 			}
 
 			String name = mStarNameStrings.get(arg0);
-			Log.v("dog", "arg :" + arg0 + "get name : " + name);
+			
 			CountryItem item = CountryDataBase.getInstance().getCountryItem(name);
-			Log.v("dog", "get cnName:" + item.getCnName());
 			((ImageView) arg1.findViewById(R.id.flag)).setBackground(
 					AssetFileTool.getBitmapDrawable(item.getSmallPath()));
 			
-			((TextView)arg1.findViewById(R.id.name)).setText(item.getCnName());
+			((TextView)arg1.findViewById(R.id.name)).setText(item.getShowName());
 			return arg1;
 		}
 		
@@ -80,6 +78,7 @@ public class SettingActivity extends BaseActivity{
 	
 	private ToggleButton mSilencButton;
 	private ToggleButton mCommButton;
+	private ToggleButton mUseEnButton;
 	private ListView mStarsListView;
 	private FlagAdapter mAdapter;
 	
@@ -101,6 +100,7 @@ public class SettingActivity extends BaseActivity{
 		
 		mSilencButton = (ToggleButton)findViewById(R.id.silence);
 		mCommButton = (ToggleButton)findViewById(R.id.common);
+		mUseEnButton = (ToggleButton)findViewById(R.id.useen);
 		mStarsListView = (ListView)findViewById(R.id.starlist);
 		mAdapter = new FlagAdapter();
 		mStarsListView.setAdapter(mAdapter);
@@ -118,6 +118,12 @@ public class SettingActivity extends BaseActivity{
 			mSilencButton.setChecked(false);
 		}
 		
+		if (PrefenceData.getInstance().isUseEN()){
+			mUseEnButton.setChecked(true);
+		}else{
+			mUseEnButton.setChecked(false);
+		}
+		
 		mSilencButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
@@ -131,6 +137,14 @@ public class SettingActivity extends BaseActivity{
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				PrefenceData.getInstance().setOnlyCommon(arg1);
+			}
+		});
+		
+		mUseEnButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				PrefenceData.getInstance().setIsUseEn(arg1);
 			}
 		});
 		

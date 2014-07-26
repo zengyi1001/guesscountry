@@ -6,6 +6,7 @@ public class CountryItem{
 	private String mPicPathString;
 	private String mSmallPicPathString;
 	private boolean mIsUsual = false;
+	private int mType = 0;
 	
 	public String getEnName(){
 		return mEnName;
@@ -45,5 +46,21 @@ public class CountryItem{
 	
 	public String getSmallPath(){
 		return mSmallPicPathString;
+	}
+	
+	public String getShowName(){
+		if (PrefenceData.getInstance().isUseEN()){
+			return mEnName;
+		}else{
+			return mCnName;
+		}
+	}
+	
+	public int getType(){
+		return mType;
+	}
+	
+	public void setType(int type){
+		mType = type;
 	}
 }

@@ -1,6 +1,6 @@
 package com.patrick.guesscountry.gamelogic;
 
-import com.patrick.guesscountry.data.PrefenceData;
+import com.patrick.guesscountry.data.SqliteDataBaseHelper;
 
 /**
  * ÓÎÏ·¼ÍÂ¼
@@ -9,6 +9,9 @@ import com.patrick.guesscountry.data.PrefenceData;
  */
 public class GameRecord{
 	private static GameRecord mInstance;
+	private int mGamePlayType = GamePlayType.GAME_TYPE_RAMDON;
+	private int mRandomRecord;
+	private int mExpertRecord;
 	public static GameRecord getInstance(){
 		if (mInstance == null){
 			mInstance = new GameRecord();
@@ -17,12 +20,17 @@ public class GameRecord{
 		return mInstance;
 	}
 	
-	private int mMaxShot = 0;
+	private int mMaxRandomShot = 0;
+	private int mMaxExpertShot = 0;
 	private boolean mHasCheered = false;
 		
 	public void init(){
-		mMaxShot = 0;
+		mMaxExpertShot = 0;
+		mMaxRandomShot = 0;
 		mHasCheered = false;
+		
+		mRandomRecord = SqliteDataBaseHelper.getInstance().getRecordCount("random");
+		mExpertRecord = SqliteDataBaseHelper.getInstance().getRecordCount("expert");
 	}
 	
 		
@@ -33,27 +41,61 @@ public class GameRecord{
 	 */
 	public boolean answer(boolean isOneTimeShot){
 		if (isOneTimeShot){
-			mMaxShot++;
-			if (mMaxShot > PrefenceData.getInstance().getRecord()){
-				PrefenceData.getInstance().setRecord(mMaxShot);
-				if (!mHasCheered){
-					mHasCheered = true;
-					return true;
+			if (mGamePlayType == GamePlayType.GAME_TYPE_RAMDON){
+				mMaxRandomShot++;
+				if (mMaxRandomShot > mRandomRecord){
+					SqliteDataBaseHelper.getInstance().setRecord("random", mMaxRandomShot);
+					mRandomRecord = mMaxRandomShot;
+					if (!mHasCheered){
+						mHasCheered = true;
+						return true;
+					}
+				}
+			}else{
+				mMaxExpertShot++;
+				if (mMaxExpertShot > mExpertRecord){
+					SqliteDataBaseHelper.getInstance().setRecord("expert", mMaxExpertShot);
+					mExpertRecord = mMaxExpertShot;
+					if (!mHasCheered){
+						mHasCheered = true;
+						return true;
+					}
 				}
 			}
+			
 			return false;
 		}else{
-			mMaxShot = 0;
+			if (mGamePlayType == GamePlayType.GAME_TYPE_RAMDON){
+				mMaxRandomShot = 0;
+			}else{
+				mMaxRandomShot = 0;
+			}
 			mHasCheered = false;
 			return false;
 		}
 	}
 	
 	public int getMaxShot(){
-		return mMaxShot;
+		if (mGamePlayType == GamePlayType.GAME_TYPE_EXPERT){
+			return mMaxExpertShot;
+		}
+		
+		return mMaxRandomShot;
 	}
 	
 	public int getRecord(){
-		return PrefenceData.getInstance().getRecord();
+		if (mGamePlayType == GamePlayType.GAME_TYPE_EXPERT){
+			return mExpertRecord;
+		}
+		
+		return mRandomRecord;
+	}
+	
+	public void setGamePlayType(int type){
+		mGamePlayType = type;
+		
+		mHasCheered = false;
+		mMaxExpertShot = 0;
+		mMaxRandomShot = 0;
 	}
 }

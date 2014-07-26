@@ -3,11 +3,9 @@ package com.patrick.guesscountry.ui;
 import java.util.HashMap;
 
 import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -23,6 +21,7 @@ import com.patrick.guesscountry.data.SqliteDataBaseHelper.IGetNewStarListener;
 import com.patrick.guesscountry.gamelogic.ExaminationItem;
 import com.patrick.guesscountry.gamelogic.GameLogic;
 import com.patrick.guesscountry.gamelogic.GameLogic.AnswerInfomation;
+import com.patrick.guesscountry.gamelogic.GamePlayType;
 import com.patrick.guesscountry.gamelogic.GameRecord;
 import com.patrick.guesscountry.gamelogic.IGameControlListener;
 import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
@@ -37,21 +36,16 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 	private HashMap<String, FlagSelectView> mCountry2ViewMap;
 	private MediaTonePlayer mMediaTonePlayer;
 	private WaitProgressDialog mProgressDialog;
-	
+	private int mGameType;
 	private AnswerPassDialog mShowAnswerDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main2);
 		mMediaTonePlayer = new MediaTonePlayer(null);
+		mGameType = getIntent().getIntExtra("type", GamePlayType.GAME_TYPE_RAMDON);
+		GameLogic.getInstance().setType(mGameType);
 		initUI();	
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 	
 	@Override
@@ -89,26 +83,26 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 			
 			@Override
 			public void onClick(View arg0) {
-				Builder builder = new Builder(MainGameActivity.this);
-				builder.setTitle("提示");
-				builder.setMessage("您确定要退出吗?");
-				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface arg0, int arg1) {
-						// TODO Auto-generated method stub
-						AppContext.getInstance().exitApp();
-					}
-				});
-				builder.setNegativeButton("取消", null);
-				builder.create().show();
+//				Builder builder = new Builder(MainGameActivity.this);
+//				builder.setTitle("提示");
+//				builder.setMessage("您确定要退出吗?");
+//				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//					
+//					@Override
+//					public void onClick(DialogInterface arg0, int arg1) {
+//						// TODO Auto-generated method stub
+//						AppContext.getInstance().exitApp();
+//					}
+//				});
+//				builder.setNegativeButton("取消", null);
+//				builder.create().show();
+				finish();
 			}
 		});
 		findViewById(R.id.btn_menu).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				startActivity(new Intent(MainGameActivity.this, SettingActivity.class));
 			}
 		});
@@ -117,7 +111,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 	}
 	
 	private void showExam(){
-		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer().getCnName());
+		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer().getShowName());
 		mImg1.setCountry(mCurExamination.getOptions().get(0));
 		mCountry2ViewMap.put(mCurExamination.getOptions().get(0).getEnName(), mImg1);
 		mImg2.setCountry(mCurExamination.getOptions().get(1));

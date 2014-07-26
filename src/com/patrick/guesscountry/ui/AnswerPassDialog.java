@@ -69,7 +69,7 @@ public class AnswerPassDialog {
 	}
 	
 	public void showAnswerName(AnswerInfomation ai){
-		mNameTextView.setText(ai.countrySelected.getCnName());
+		mNameTextView.setText(ai.countrySelected.getShowName());
 		mFlagView.setBackgroundDrawable(
 				AssetFileTool.getBitmapDrawable(
 						ai.countrySelected.getPicPath()));

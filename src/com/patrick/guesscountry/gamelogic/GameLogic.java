@@ -13,8 +13,10 @@ public class GameLogic {
 		public boolean isRight;
 		public boolean shoudCheer;
 	}
+	
 	private static GameLogic mInstance;
 	private ArrayList<IGameControlListener> mGameListeners;
+	private int mGamePlayType = GamePlayType.GAME_TYPE_RAMDON;
 	
 	public static GameLogic getInstance(){
 		if (mInstance == null){
@@ -31,7 +33,7 @@ public class GameLogic {
 	private ExaminationItem mCurExamination;
 	
 	private ExaminationItem generateExamination(){
-		mCurExamination = new ExaminationItem();
+		mCurExamination = GamePlayTypeFactory.getInstance().getGameType(mGamePlayType).getExamItem();
 		return mCurExamination;
 	}
 	
@@ -78,5 +80,10 @@ public class GameLogic {
 	
 	public void init(){
 		mGameListeners = new ArrayList<IGameControlListener>();
+	}
+	
+	public void setType(int type){
+		mGamePlayType = type;
+		GameRecord.getInstance().setGamePlayType(mGamePlayType);
 	}
 }

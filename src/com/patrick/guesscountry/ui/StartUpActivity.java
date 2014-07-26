@@ -24,7 +24,7 @@ public class StartUpActivity extends BaseActivity implements IGameInitListener{
 			
 			@Override
 			public void run() {
-				Intent intent = new Intent(AppContext.getInstance(), MainGameActivity.class);
+				Intent intent = new Intent(AppContext.getInstance(), NaviActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				AppContext.getInstance().startActivity(intent);
 				finish();
