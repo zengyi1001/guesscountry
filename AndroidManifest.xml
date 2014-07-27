@@ -95,6 +95,11 @@
             android:name="com.patrick.guesscountry.ui.ShowCountryActivity"
             android:screenOrientation="portrait" >
         </activity>
+        
+         <activity
+            android:name="com.patrick.guesscountry.ui.MyRecordActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 芒果广告平台Activity -->
         <activity android:name="com.adsmogo.adsmogobanner.XmlTypeAD" >
         </activity>

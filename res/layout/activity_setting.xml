@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="60sp"
+        android:layout_height="50sp"
         android:background="@drawable/navibg" >
 
         <Button
@@ -111,7 +111,7 @@
                 android:layout_centerVertical="true"
                 android:text="英文显示国家"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
             <ToggleButton
                 android:id="@+id/useen"
@@ -124,39 +124,7 @@
                 android:textOn="" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/setting_en"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/flagnumtip"
-                android:text="您捕获的国旗(0个):"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/flagstarinfo"
-                android:text="（连续答对三次即可捕获该国旗）"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <ListView
-                android:id="@+id/starlist"
-                android:layout_width="fill_parent"
-                android:divider="@null"
-                android:scrollbars="none"
-                android:dividerHeight="5dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" >
-            </ListView>
-        </LinearLayout>
+        
     </RelativeLayout>
 
     <RelativeLayout

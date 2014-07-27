@@ -68,7 +68,7 @@ public class GameRecord{
 			if (mGamePlayType == GamePlayType.GAME_TYPE_RAMDON){
 				mMaxRandomShot = 0;
 			}else{
-				mMaxRandomShot = 0;
+				mMaxExpertShot = 0;
 			}
 			mHasCheered = false;
 			return false;
@@ -76,11 +76,11 @@ public class GameRecord{
 	}
 	
 	public int getMaxShot(){
-		if (mGamePlayType == GamePlayType.GAME_TYPE_EXPERT){
-			return mMaxExpertShot;
+		if (mGamePlayType == GamePlayType.GAME_TYPE_RAMDON){
+			return mMaxRandomShot;
 		}
 		
-		return mMaxRandomShot;
+		return mMaxExpertShot;
 	}
 	
 	public int getRecord(){

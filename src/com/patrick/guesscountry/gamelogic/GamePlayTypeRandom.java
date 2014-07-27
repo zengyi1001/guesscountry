@@ -2,7 +2,7 @@ package com.patrick.guesscountry.gamelogic;
 
 import java.util.Random;
 
-import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
 import com.patrick.guesscountry.data.PrefenceData;
 
@@ -34,7 +34,7 @@ public class GamePlayTypeRandom extends GamePlayType {
 	}
 	
 	private CountryItem generateDataRandom(){
-		int randomIndex = new Random().nextInt(CountryDataBase.getInstance().getDataSize());
-		return CountryDataBase.getInstance().getAllCountrys().get(randomIndex);
+		int randomIndex = new Random().nextInt(CountryData.getInstance().getDataSize());
+		return CountryData.getInstance().getAllCountrys().get(randomIndex);
 	}
 }

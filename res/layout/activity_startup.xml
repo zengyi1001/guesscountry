@@ -9,14 +9,23 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/mainbg" />
+        android:alpha="1"
+        android:background="@drawable/navishowbg" />
+    
+    <ImageView
+        android:layout_width="300sp"
+        android:layout_height="160sp"
+        android:alpha="1"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/title" />
 
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Loading..."
         android:layout_marginBottom="20sp"
-        android:textColor="@color/green"
+        android:textColor="@color/black"
         android:layout_centerHorizontal="true"
         android:textSize="35sp"/>
     

@@ -86,7 +86,7 @@ public class SqliteDataBaseHelper {
 			String starName = cursor.getString(cursor.getColumnIndex("name"));
 			int count = cursor.getInt(cursor.getColumnIndex("count"));
 			Log.v("dog", "init name : " + starName + ", count :" + count);
-			if (count >= CountryDataBase.BE_STAR_COUNT){
+			if (count >= CountryData.BE_STAR_COUNT){
 				mStarNames.add(starName);
 			}
 		}
@@ -118,7 +118,7 @@ public class SqliteDataBaseHelper {
 		if (0 == count){
 			count++;
 			insertStar(starName);
-			if (count == CountryDataBase.BE_STAR_COUNT){
+			if (count == CountryData.BE_STAR_COUNT){
 				if (mListener != null){
 					mListener.onGetNewStar(starName);
 				}
@@ -128,7 +128,7 @@ public class SqliteDataBaseHelper {
 		}else{
 			count++;
 			updateStarRecord(starName, count);
-			if (count == CountryDataBase.BE_STAR_COUNT){
+			if (count == CountryData.BE_STAR_COUNT){
 				if (mListener != null){
 					mListener.onGetNewStar(starName);
 				}

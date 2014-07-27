@@ -3,7 +3,10 @@ package com.patrick.guesscountry.ui;
 import java.util.HashMap;
 
 import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,7 +18,7 @@ import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
-import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.SqliteDataBaseHelper;
 import com.patrick.guesscountry.data.SqliteDataBaseHelper.IGetNewStarListener;
 import com.patrick.guesscountry.gamelogic.ExaminationItem;
@@ -28,6 +31,16 @@ import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
 
 public class MainGameActivity extends BaseActivity implements IDialogDismissListener
 		, IGameControlListener, IGetNewStarListener{
+	class ShowLanguageChangedReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context arg0, Intent arg1) {
+			changeShowLanguage();
+		}
+		
+	}
+	
+	
 	private ExaminationItem mCurExamination;
 	private FlagSelectView mImg1;
 	private FlagSelectView mImg2;
@@ -38,6 +51,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 	private WaitProgressDialog mProgressDialog;
 	private int mGameType;
 	private AnswerPassDialog mShowAnswerDialog;
+	private ShowLanguageChangedReceiver mShowLanguageChangedReceiver;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +59,8 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		mMediaTonePlayer = new MediaTonePlayer(null);
 		mGameType = getIntent().getIntExtra("type", GamePlayType.GAME_TYPE_RAMDON);
 		GameLogic.getInstance().setType(mGameType);
+		mShowLanguageChangedReceiver = new ShowLanguageChangedReceiver();
+		registerReceiver(mShowLanguageChangedReceiver, new IntentFilter(SettingActivity.ACTION_SHOW_LANGUAGE_CHANGED));
 		initUI();	
 	}
 	
@@ -65,6 +81,12 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		SqliteDataBaseHelper.getInstance().removeListener(this);
 	}
 	
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		unregisterReceiver(mShowLanguageChangedReceiver);
+	}
+	
 	private void initUI(){
 		mImg1 = new FlagSelectView();
 		mImg1.setRootView(findViewById(R.id.option1));
@@ -83,19 +105,6 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 			
 			@Override
 			public void onClick(View arg0) {
-//				Builder builder = new Builder(MainGameActivity.this);
-//				builder.setTitle("提示");
-//				builder.setMessage("您确定要退出吗?");
-//				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//					
-//					@Override
-//					public void onClick(DialogInterface arg0, int arg1) {
-//						// TODO Auto-generated method stub
-//						AppContext.getInstance().exitApp();
-//					}
-//				});
-//				builder.setNegativeButton("取消", null);
-//				builder.create().show();
 				finish();
 			}
 		});
@@ -108,6 +117,12 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		});
 		mShowAnswerDialog = new AnswerPassDialog(this, this);
 		mProgressDialog = new WaitProgressDialog(this);
+		
+		if (mGameType == GamePlayType.GAME_TYPE_EXPERT){
+			((TextView)findViewById(R.id.modetip)).setText("专家模式");
+		}else{
+			((TextView)findViewById(R.id.modetip)).setText("随机模式");
+		}
 	}
 	
 	private void showExam(){
@@ -161,7 +176,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 
 	@Override
 	public void onGetNewStar(String starName) {
-		String cnName = CountryDataBase.getInstance().getCnName(starName);
+		String cnName = CountryData.getInstance().getCnName(starName);
 		Builder builder = new Builder(this);
 		builder.setMessage("您收藏了国家“"+cnName+"”");
 		builder.setTitle("恭喜！");
@@ -173,16 +188,16 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
-	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "再按一次退出应用", Toast.LENGTH_SHORT).show();                                
-	            exitTime = System.currentTimeMillis();   
-	        } else {
-	            AppContext.getInstance().exitApp();
-	        }
-	        return true;   
-	    }
+	    MainGameActivity.this.finish();
 	    return super.onKeyDown(keyCode, event);
+	}
+	
+	private void changeShowLanguage(){
+		mImg1.changeShowLanguage();
+		mImg2.changeShowLanguage();
+		mImg3.changeShowLanguage();
+		mImg4.changeShowLanguage();
+		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer().getShowName());
 	}
 	
 }

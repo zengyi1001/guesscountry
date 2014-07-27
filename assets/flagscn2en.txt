@@ -130,7 +130,7 @@
 尼泊尔:Nepal
 埃塞俄比亚:Ethiopia:3
 吉布提:Djibouti:3
-﻿阿富汗:Afghanistan:3
+阿富汗:Afghanistan:3
 瑞士:Switzerland:2
 纽埃岛(新):Niue I.
 东萨摩亚(美):Samoa,Eastern
@@ -163,7 +163,7 @@
 爱尔兰:Ireland:1
 加蓬:Gabon:1
 巴林:Bahrain
-特克斯和凯科斯群岛(:Turks and Caicos Is.
+特克斯和凯科斯群岛:Turks and Caicos Is.
 希腊:Greece:2
 孟加拉国:Bangladesh
 马拉维:Malawi:3

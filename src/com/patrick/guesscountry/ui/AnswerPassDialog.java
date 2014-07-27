@@ -21,7 +21,6 @@ public class AnswerPassDialog {
 	}
 	private Dialog mDialog;
 	private TextView mNameTextView;
-	private TextView mRecordTextView;
 	private IDialogDismissListener mListener;
 	private View mRootView;
 	private ImageView mFlagView;
@@ -57,7 +56,6 @@ public class AnswerPassDialog {
 		
 		mNameTextView = (TextView)mRootView.findViewById(R.id.name);
 		mFlagView = (ImageView)mRootView.findViewById(R.id.img);
-		mRecordTextView = (TextView)mRootView.findViewById(R.id.record);
 		
 		mRootView.findViewById(R.id.body).setOnClickListener(new OnClickListener() {
 			

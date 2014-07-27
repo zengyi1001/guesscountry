@@ -17,7 +17,7 @@ import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.guesscountry.R;
-import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
 
 public class ShowCountryActivity extends BaseActivity {
@@ -83,7 +83,7 @@ public class ShowCountryActivity extends BaseActivity {
 	private void initUI(){
 		mListView = (ListView)findViewById(R.id.starlist);
 		mAdapter = new FlagAdapter();
-		mAdapter.setStarList(CountryDataBase.getInstance().getAllCountrys());
+		mAdapter.setStarList(CountryData.getInstance().getAllCountrys());
 		
 		mListView.setAdapter(mAdapter);
 		

@@ -55,4 +55,7 @@ public class FlagSelectView {
 		mCryImageView.setVisibility(View.VISIBLE);
 	}
 
+	public void changeShowLanguage(){
+		mNameTextView.setText(mCountryItem.getShowName());
+	}
 }

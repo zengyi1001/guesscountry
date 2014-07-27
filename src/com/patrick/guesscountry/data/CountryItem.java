@@ -5,6 +5,8 @@ public class CountryItem{
 	private String mCnName;
 	private String mPicPathString;
 	private String mSmallPicPathString;
+	private String mCnStateNameString = "";
+	private String mEnStateNameString = "";
 	private boolean mIsUsual = false;
 	private int mType = 0;
 	
@@ -50,9 +52,9 @@ public class CountryItem{
 	
 	public String getShowName(){
 		if (PrefenceData.getInstance().isUseEN()){
-			return mEnName;
+			return mEnName+"(" + mEnStateNameString+")";
 		}else{
-			return mCnName;
+			return mCnName+"(" + mCnStateNameString+")";
 		}
 	}
 	
@@ -62,5 +64,17 @@ public class CountryItem{
 	
 	public void setType(int type){
 		mType = type;
+	}
+	
+	public void setCNStateName(String name){
+		mCnStateNameString = name;
+	}
+	
+	public void setEnStateName(String name){
+		mEnStateNameString = name;
+	}
+	
+	public String getCnStateName(){
+		return mCnStateNameString;
 	}
 }

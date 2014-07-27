@@ -29,6 +29,6 @@ public class StartUpActivity extends BaseActivity implements IGameInitListener{
 				AppContext.getInstance().startActivity(intent);
 				finish();
 			}
-		}, 1 * 1000);
+		}, 2 * 1000);
 	}
 }

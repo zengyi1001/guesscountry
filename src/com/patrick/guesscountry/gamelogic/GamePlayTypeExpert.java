@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.patrick.guesscountry.data.CountryDataBase;
+import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
 
 public class GamePlayTypeExpert extends GamePlayType{
@@ -21,7 +21,7 @@ public class GamePlayTypeExpert extends GamePlayType{
 		mAllType2CountryArrayList = new ArrayList<CountryItem>();
 		mAllType3CountryArrayList = new ArrayList<CountryItem>();
 		mAllType4CountryArrayList = new ArrayList<CountryItem>();
-		mAllCountry = CountryDataBase.getInstance().getAllCountrys();
+		mAllCountry = CountryData.getInstance().getAllCountrys();
 		initAllType();
 	}
 	@Override
@@ -34,7 +34,7 @@ public class GamePlayTypeExpert extends GamePlayType{
 	}
 	
 	private void initAllType(){
-		ArrayList<CountryItem> allCountry = CountryDataBase.getInstance().getAllCountrys();
+		ArrayList<CountryItem> allCountry = CountryData.getInstance().getAllCountrys();
 		
 		Iterator<CountryItem> iterator = allCountry.iterator();
 		while (iterator.hasNext()){
