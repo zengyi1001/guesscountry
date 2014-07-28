@@ -33,7 +33,45 @@ public class MediaTonePlayer {
 		
 		return mediaPlayer;
 	}
+	
+	public void playBeepSound(String assertFilePath){
+		if (PrefenceData.getInstance().isSilence()){
+			return;
+		}
+		
+		if (mMediaPlayer == null) {
+			throw new RuntimeException("MediaPlayer has been released.");
+		}
+		if (mMediaPlayer.isPlaying()) {
+			mMediaPlayer.stop();
+		}
+
+		mMediaPlayer.reset();
+		mMediaPlayer.setLooping(false);
+		AssetFileDescriptor file = AssetFileTool.getFileDescriptor(assertFilePath);
+		if (file == null){
+			return ;
+		}
+		try {
+			mMediaPlayer.setDataSource(file.getFileDescriptor(), file.getStartOffset(), file.getLength());
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			mMediaPlayer.prepare();
+			mMediaPlayer.start();
+		} catch (IllegalStateException ioe) {
 			
+		} catch (IllegalArgumentException e) {
+			
+		} catch (IOException e) {
+			
+		} finally {
+			try {
+				file.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void playBeepSound(int beeId) {
 		if (PrefenceData.getInstance().isSilence()){
 			return;

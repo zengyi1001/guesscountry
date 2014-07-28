@@ -7,6 +7,7 @@ public class CountryItem{
 	private String mSmallPicPathString;
 	private String mCnStateNameString = "";
 	private String mEnStateNameString = "";
+	private String mSoundString = "";
 	private boolean mIsUsual = false;
 	private int mType = 0;
 	
@@ -76,5 +77,13 @@ public class CountryItem{
 	
 	public String getCnStateName(){
 		return mCnStateNameString;
+	}
+	
+	public String getSoundString(){
+		return mSoundString;
+	}
+	
+	public void setSoundString(String soundString){
+		mSoundString = soundString;
 	}
 }

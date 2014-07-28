@@ -3,6 +3,7 @@ package com.patrick.generaltool;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -49,5 +50,18 @@ public class AssetFileTool {
 			return false;
 			
 		}
+	}
+	
+	public static AssetFileDescriptor getFileDescriptor(String filePath){
+		AssetManager am = AppContext.getInstance().getAssets();
+		try {
+			AssetFileDescriptor afd = am.openFd(filePath);
+			return afd;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

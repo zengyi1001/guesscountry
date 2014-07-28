@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import android.R.integer;
 import android.util.Log;
 
 import com.patrick.generaltool.AppContext;
@@ -62,7 +61,8 @@ public class CountryData {
 			item.setEnName(nameString);
 			item.setPicPath("countrys/" + allPicFiles[i]);
 			String bianpingPathString= "countrys_small/" + allPicFiles[i];
-			
+			String soundString = "sounds/" + nameString.toLowerCase() + ".mp3";
+			item.setSoundString(soundString);
 			if (europCountries.contains(cnName)){
 				item.setCNStateName("ŷ");
 				item.setEnStateName("EU");

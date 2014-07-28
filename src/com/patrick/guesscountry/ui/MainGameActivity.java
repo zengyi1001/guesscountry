@@ -138,6 +138,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		String recordString = String.format("当前连对 %d 个\n最高连对 %d 个", GameRecord.getInstance().getMaxShot(),
 				GameRecord.getInstance().getRecord());
 		((TextView)findViewById(R.id.record)).setText(recordString);
+		mMediaTonePlayer.playBeepSound(mCurExamination.getAnswer().getSoundString());
 	}
 
 	@Override

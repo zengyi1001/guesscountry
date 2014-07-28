@@ -16,12 +16,23 @@ import android.widget.TextView;
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.generaltool.BaseActivity;
+import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
 
 public class ShowCountryActivity extends BaseActivity {
 	class FlagAdapter extends BaseAdapter{
+		class FlagClick implements OnClickListener{
+			CountryItem item;
+			public FlagClick(CountryItem item){
+				this.item = item;
+			}
+			@Override
+			public void onClick(View arg0) {
+				mPlayer.playBeepSound(item.getSoundString());
+			}
+		}
 		private ArrayList<CountryItem> mStars;
 		private LayoutInflater inflater;
 		public FlagAdapter(){
@@ -65,6 +76,7 @@ public class ShowCountryActivity extends BaseActivity {
 					AssetFileTool.getBitmapDrawable(item.getSmallPath()));
 			
 			((TextView)arg1.findViewById(R.id.name)).setText(item.getShowName());
+			arg1.findViewById(R.id.flag).setOnClickListener(new FlagClick(item));
 			return arg1;
 		}
 		
@@ -72,12 +84,13 @@ public class ShowCountryActivity extends BaseActivity {
 	
 	private ListView mListView;
 	private FlagAdapter mAdapter;
-	
+	private MediaTonePlayer mPlayer;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_showcountrys);
 		initUI();
+		mPlayer = new MediaTonePlayer(null);
 	}
 	
 	private void initUI(){
