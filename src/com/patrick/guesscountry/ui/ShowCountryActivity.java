@@ -61,7 +61,7 @@ public class ShowCountryActivity extends BaseActivity {
 
 			CountryItem item = mStars.get(arg0);
 		
-			((ImageView) arg1.findViewById(R.id.flag)).setBackground(
+			((ImageView) arg1.findViewById(R.id.flag)).setBackgroundDrawable(
 					AssetFileTool.getBitmapDrawable(item.getSmallPath()));
 			
 			((TextView)arg1.findViewById(R.id.name)).setText(item.getShowName());

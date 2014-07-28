@@ -63,7 +63,7 @@ public class MyRecordActivity extends BaseActivity{
 			String name = mStarNameStrings.get(arg0);
 			
 			CountryItem item = CountryData.getInstance().getCountryItem(name);
-			((ImageView) arg1.findViewById(R.id.flag)).setBackground(
+			((ImageView) arg1.findViewById(R.id.flag)).setBackgroundDrawable(
 					AssetFileTool.getBitmapDrawable(item.getSmallPath()));
 			
 			((TextView)arg1.findViewById(R.id.name)).setText(item.getShowName());
