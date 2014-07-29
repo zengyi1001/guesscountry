@@ -12,9 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.BaseActivity;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
@@ -123,6 +121,16 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		}else{
 			((TextView)findViewById(R.id.modetip)).setText("Ëæ»úÄ£Ê½");
 		}
+		
+		findViewById(R.id.word).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (mCurExamination != null && mCurExamination.getAnswer() != null){
+					mMediaTonePlayer.playBeepSound(mCurExamination.getAnswer().getSoundString());
+				}
+			}
+		});
 	}
 	
 	private void showExam(){

@@ -9,31 +9,36 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="1"
+        android:alpha="0.7"
         android:background="@drawable/navishowbg" />
-    
+
     <ImageView
         android:layout_width="300sp"
         android:layout_height="160sp"
-        android:alpha="1"
-        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:alpha="1"
         android:background="@drawable/title" />
 
-    <TextView android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Loading..."
-        android:layout_marginBottom="20sp"
-        android:textColor="@color/black"
+        android:layout_above="@+id/author"
         android:layout_centerHorizontal="true"
-        android:textSize="35sp"/>
-    
-    <TextView android:layout_width="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:text="Version 1.0.0"
+        android:textColor="@color/green"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/author"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible"
         android:text="派大星是艺术家"
         android:textColor="@color/greenyellow"
-        android:layout_alignParentRight="true"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
+
 </RelativeLayout>
