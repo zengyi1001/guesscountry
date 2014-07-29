@@ -13,61 +13,61 @@
 
     <Button
         android:id="@+id/random"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:background="@drawable/btn_selector"
+        android:background="@drawable/btn_navi_selector"
         android:text="随机模式"
-        android:textColor="@color/whitesmoke"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/expert"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/random"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_selector"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_navi_selector"
         android:text="专家模式"
-        android:textColor="@color/whitesmoke"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/showall"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/expert"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_selector"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_navi_selector"
         android:text="国旗浏览"
-        android:textColor="@color/whitesmoke"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/myrecord"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/showall"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_selector"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_navi_selector"
         android:text="我的记录"
-        android:textColor="@color/whitesmoke"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/exit"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/myrecord"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_selector"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_navi_selector"
         android:text="退出"
-        android:textColor="@color/whitesmoke"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
 </RelativeLayout>

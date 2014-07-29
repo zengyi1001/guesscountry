@@ -106,7 +106,7 @@
 加拿大:Canada:3
 开曼群岛(英):Cayman Is.
 马尔代夫:Maldive:4
-巴基斯坦:Pskistan:4
+巴基斯坦:Pakistan:4
 印度:India:3
 斯里兰卡:Sri Lanka
 南斯拉夫:Yugoslavia
@@ -201,7 +201,7 @@
 荷属安的列斯群岛:Netherlandsantilles Is.
 中华人民共和国:P.R.C.
 波斯尼亚和黑塞哥维那:Bosnia And Herzegovina
-科摩罗:Comoro:4
+科摩罗:Comoros:4
 巴西:Brazil
 佛得角:Cape Verde
 斯洛文尼亚:Slovenia:3
