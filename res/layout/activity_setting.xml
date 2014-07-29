@@ -129,25 +129,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttom" >
-        
-        <TextView android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="10sp"
-            android:textColor="@color/black"
+
+        <TextView
             android:id="@+id/logodesign"
-            
-            android:layout_alignLeft="@+id/author"
-            android:text="Logo设计：@-老头罗-"/>
-        
-        <TextView android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textSize="10sp"
-            android:id="@+id/author"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/author"
+            android:text="Logo设计：@-老头罗-"
             android:textColor="@color/black"
-            android:layout_below="@+id/logodesign"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="制作：@Chandler_Bang"/>
-        
+            android:layout_below="@+id/logodesign"
+            android:text="制作：@Chandler_Bang"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
     </RelativeLayout>
 
     <RelativeLayout

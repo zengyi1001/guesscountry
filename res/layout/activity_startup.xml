@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.7"
+        android:alpha="0.3"
         android:background="@drawable/navishowbg" />
 
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10sp"
         android:text="Version 1.0.0"
-        android:textColor="@color/green"
+        android:textColor="@color/red"
         android:textSize="20sp" />
 
     <TextView
