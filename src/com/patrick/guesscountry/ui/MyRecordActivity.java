@@ -16,17 +16,31 @@ import android.widget.TextView;
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.generaltool.BaseActivity;
+import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
 import com.patrick.guesscountry.data.SqliteDataBaseHelper;
+import com.patrick.guesscountry.ui.ShowCountryActivity.FlagAdapter.FlagClick;
 
 public class MyRecordActivity extends BaseActivity{
 	class FlagAdapter extends BaseAdapter{
+		class FlagClick implements OnClickListener{
+			CountryItem item;
+			public FlagClick(CountryItem item){
+				this.item = item;
+			}
+			@Override
+			public void onClick(View arg0) {
+				mPlayer.playBeepSound(item.getSoundString());
+			}
+		}
+		private MediaTonePlayer mPlayer;
 		private ArrayList<String> mStarNameStrings;
 		private LayoutInflater inflater;
 		public FlagAdapter(){
 			inflater = LayoutInflater.from(AppContext.getInstance());
+			mPlayer = new MediaTonePlayer(null);
 		}
 		@Override
 		public int getCount() {
@@ -67,6 +81,7 @@ public class MyRecordActivity extends BaseActivity{
 					AssetFileTool.getBitmapDrawable(item.getSmallPath()));
 			
 			((TextView)arg1.findViewById(R.id.name)).setText(item.getShowName());
+			arg1.findViewById(R.id.flag).setOnClickListener(new FlagClick(item));
 			return arg1;
 		}
 		
