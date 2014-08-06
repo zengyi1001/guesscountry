@@ -34,7 +34,7 @@
         android:theme="@android:style/Theme.NoTitleBar" >
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
-            android:value="MeiZu" />
+            android:value="360 Market" />
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="e50d7f4242" />

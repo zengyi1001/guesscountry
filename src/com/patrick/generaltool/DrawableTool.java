@@ -3,7 +3,6 @@ package com.patrick.generaltool;
 import java.io.InputStream;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 public class DrawableTool {

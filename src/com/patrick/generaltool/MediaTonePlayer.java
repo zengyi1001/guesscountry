@@ -2,12 +2,12 @@ package com.patrick.generaltool;
 
 import java.io.IOException;
 
-import com.patrick.guesscountry.data.PrefenceData;
-
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+
+import com.patrick.guesscountry.data.PrefenceData;
 
 public class MediaTonePlayer {
 	private MediaPlayer mMediaPlayer;

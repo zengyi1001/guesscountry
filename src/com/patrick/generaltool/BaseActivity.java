@@ -1,16 +1,13 @@
 package com.patrick.generaltool;
 
-import com.baidu.mobstat.StatActivity;
-import com.baidu.mobstat.StatService;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.WindowManager;
+
+import com.baidu.mobstat.StatService;
 
 public class BaseActivity extends Activity{
 	class FinishReceiver extends BroadcastReceiver{
