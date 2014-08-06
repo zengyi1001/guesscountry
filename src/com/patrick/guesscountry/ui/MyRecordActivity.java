@@ -16,10 +16,12 @@ import android.widget.TextView;
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.generaltool.BaseActivity;
+import com.patrick.generaltool.ConstUtil;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
 import com.patrick.guesscountry.data.SqliteDataBaseHelper;
+import com.pubukeji.diandeows.adviews.DiandeBanner;
 
 public class MyRecordActivity extends BaseActivity{
 	class FlagAdapter extends BaseAdapter{
@@ -79,6 +81,7 @@ public class MyRecordActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_myrecord);
+		show360Ads();
 	}
 	
 	@Override
@@ -107,5 +110,11 @@ public class MyRecordActivity extends BaseActivity{
 		
 		((TextView)findViewById(R.id.flagnumtip)).setText("您捕获的国旗 " + SqliteDataBaseHelper.getInstance().getAllStarNames().size() + " 个");
 		((TextView)findViewById(R.id.flagstarinfo)).setText("（连续答对该国国旗 " + CountryData.BE_STAR_COUNT + " 次即可捕获）");
+	}
+	
+	private void show360Ads(){
+		DiandeBanner banner = (DiandeBanner)findViewById(R.id.bannerView);
+		banner.setAD_ID(ConstUtil.banner_AD_ID);
+		banner.show();
 	}
 }

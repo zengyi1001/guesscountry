@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.patrick.generaltool.BaseActivity;
+import com.patrick.generaltool.ConstUtil;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.data.CountryData;
@@ -26,6 +27,7 @@ import com.patrick.guesscountry.gamelogic.GamePlayType;
 import com.patrick.guesscountry.gamelogic.GameRecord;
 import com.patrick.guesscountry.gamelogic.IGameControlListener;
 import com.patrick.guesscountry.ui.AnswerPassDialog.IDialogDismissListener;
+import com.pubukeji.diandeows.adviews.DiandeBanner;
 
 public class MainGameActivity extends BaseActivity implements IDialogDismissListener
 		, IGameControlListener, IGetNewStarListener{
@@ -60,6 +62,7 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		mShowLanguageChangedReceiver = new ShowLanguageChangedReceiver();
 		registerReceiver(mShowLanguageChangedReceiver, new IntentFilter(SettingActivity.ACTION_SHOW_LANGUAGE_CHANGED));
 		initUI();	
+		show360Ads();
 	}
 	
 	@Override
@@ -192,8 +195,6 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		builder.setPositiveButton("È·¶¨", null);
 		builder.create().show();
 	}		
-	
-	private long exitTime = 0;
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -207,6 +208,13 @@ public class MainGameActivity extends BaseActivity implements IDialogDismissList
 		mImg3.changeShowLanguage();
 		mImg4.changeShowLanguage();
 		((TextView)findViewById(R.id.word)).setText(mCurExamination.getAnswer().getShowName());
+	}
+	
+	
+	private void show360Ads(){
+		DiandeBanner banner = (DiandeBanner)findViewById(R.id.bannerView);
+		banner.setAD_ID(ConstUtil.banner_AD_ID);
+		banner.show();
 	}
 	
 }

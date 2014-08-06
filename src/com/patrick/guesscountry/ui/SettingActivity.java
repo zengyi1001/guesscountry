@@ -9,8 +9,10 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ToggleButton;
 
 import com.patrick.generaltool.BaseActivity;
+import com.patrick.generaltool.ConstUtil;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.data.PrefenceData;
+import com.pubukeji.diandeows.adviews.DiandeBanner;
 
 public class SettingActivity extends BaseActivity{
 		
@@ -24,6 +26,7 @@ public class SettingActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting);
 		initUI();
+		show360Ads();
 	}
 	
 	private void initUI(){
@@ -82,5 +85,11 @@ public class SettingActivity extends BaseActivity{
 				sendBroadcast(intent);
 			}
 		});
+	}
+	
+	private void show360Ads(){
+		DiandeBanner banner = (DiandeBanner)findViewById(R.id.bannerView);
+		banner.setAD_ID(ConstUtil.banner_AD_ID);
+		banner.show();
 	}
 }

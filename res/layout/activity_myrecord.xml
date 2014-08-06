@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:adsmogo="http://www.adsmogo.com"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lemonchiffon"
@@ -36,22 +35,22 @@
         android:layout_marginRight="30dp" >
 
         <TextView
+            android:id="@+id/random"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:id="@+id/random"
             android:layout_marginTop="20dp"
             android:text="随机模式最大连击记录：20"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/expert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/expert"
+            android:layout_below="@+id/random"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/random"
             android:text="专家模式最大连击记录：20"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -96,14 +95,14 @@
         android:layout_width="match_parent"
         android:layout_height="60sp"
         android:layout_alignParentBottom="true" >
-
-        <com.adsmogo.adview.AdsMogoLayout
-            android:id="@+id/adsMogoView"
+        <com.pubukeji.diandeows.adviews.DiandeBanner
+            android:id="@+id/bannerView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            adsmogo:appid="c5e77b1e621a46b09df7a9930491a40b" >
-        </com.adsmogo.adview.AdsMogoLayout>
+            android:layout_alignParentBottom="true" />
+
+        
+        
     </RelativeLayout>
 
 </RelativeLayout>

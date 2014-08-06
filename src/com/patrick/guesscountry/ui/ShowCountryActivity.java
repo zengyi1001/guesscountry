@@ -16,10 +16,12 @@ import android.widget.TextView;
 import com.patrick.generaltool.AppContext;
 import com.patrick.generaltool.AssetFileTool;
 import com.patrick.generaltool.BaseActivity;
+import com.patrick.generaltool.ConstUtil;
 import com.patrick.generaltool.MediaTonePlayer;
 import com.patrick.guesscountry.R;
 import com.patrick.guesscountry.data.CountryData;
 import com.patrick.guesscountry.data.CountryItem;
+import com.pubukeji.diandeows.adviews.DiandeBanner;
 
 public class ShowCountryActivity extends BaseActivity {
 	class FlagAdapter extends BaseAdapter{
@@ -91,6 +93,7 @@ public class ShowCountryActivity extends BaseActivity {
 		setContentView(R.layout.activity_showcountrys);
 		initUI();
 		mPlayer = new MediaTonePlayer(null);
+		show360Ads();
 	}
 	
 	private void initUI(){
@@ -107,5 +110,11 @@ public class ShowCountryActivity extends BaseActivity {
 				finish();
 			}
 		});
+	}
+	
+	private void show360Ads(){
+		DiandeBanner banner = (DiandeBanner)findViewById(R.id.bannerView);
+		banner.setAD_ID(ConstUtil.banner_AD_ID);
+		banner.show();
 	}
 }
